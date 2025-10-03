@@ -54,31 +54,31 @@ class Program
 
     public void LoginWUser()
     {
-        int Pin = 0;
-        string NameUser = "";
-
-        foreach (Account account in accounts) 
-        {
-            Pin = account.Pin;
-            NameUser = account.Name;
-        }
-
-        string Name;
-
-        int Password;
         string Input;
+        string NameUser;
 
-        do
+        while (true)
         {
-            Console.WriteLine("Enter Name");
-            Name = Console.ReadLine();
-            Console.WriteLine("Enter Password");
+
+            Console.WriteLine("Type in Name");
+            NameUser = Console.ReadLine();
+            Console.WriteLine("Type in Pin");
             Input = Console.ReadLine();
-            if(int.TryParse(Input, out Password)) {}
 
-        } while (Name != NameUser || Password != Pin );
-
-        Console.WriteLine("YEEEEEEEEEEEEEES");
+            if (int.TryParse(Input, out int InputPin))
+            {
+                Account Found = accounts.Find(a => a.Name == NameUser || a.Pin == InputPin);
+                if (Found != null)
+                {
+                    UserInterface();
+                    break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Wrong Input");
+            }
+        } 
     }
 
     private void TransferMoney()
