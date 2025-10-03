@@ -4,14 +4,95 @@ class Program
 {
     private List<Account> accounts = new List<Account>();
     private List<TransactionManager> Transactions = new List<TransactionManager>();
+    private List<AccountAdmin> admins = new List<AccountAdmin>();
 
     public static void Main()
     {
-        
         Program p = new Program();
 
-        Account account1 = new Account { Id = 1, Name = "Ardi Kuchi", Pin = 1101, Balance = 1500 };
+        int CaseNum;
+        do
+        {
 
+            Console.WriteLine("Press 1 to Login with Admin");
+            Console.WriteLine("Press 2 to Login with User");
+            Console.WriteLine("Press 9 to leave");
+
+            string input = Console.ReadLine();
+            if (int.TryParse(input, out CaseNum)) { }
+            else
+            {
+                Console.WriteLine("Wrong Input, only integers are accepted");
+            }
+            switch (CaseNum)
+            {
+                case 1: p.LoginWAdmin(); break;
+                case 2: p.LoginWUser(); break;
+            }
+        } while (CaseNum != 9);
+
+    }
+
+    public void LoginWAdmin()
+    {
+        AccountAdmin admin = new AccountAdmin { Id = 1, Name = "Kuchi", Password = "kuchi123" };
+        admins.Add(admin);
+
+        string Name, Password;
+
+        do
+        {
+            Console.WriteLine("Enter Name");
+            Name = Console.ReadLine();
+            Console.WriteLine("Enter Password");
+            Password = Console.ReadLine();
+        } while (Name != admin.Name || Password != admin.Password);
+
+        AdminInterface();
+        
+    }
+
+    public void LoginWUser()
+    {
+        int Pin = 0;
+        string NameUser = "";
+
+        foreach (Account account in accounts) 
+        {
+            Pin = account.Pin;
+            NameUser = account.Name;
+        }
+
+        string Name;
+
+        int Password;
+        string Input;
+
+        do
+        {
+            Console.WriteLine("Enter Name");
+            Name = Console.ReadLine();
+            Console.WriteLine("Enter Password");
+            Input = Console.ReadLine();
+            if(int.TryParse(Input, out Password)) {}
+
+        } while (Name != NameUser || Password != Pin );
+
+        Console.WriteLine("YEEEEEEEEEEEEEES");
+    }
+
+    private void LoginAdmin()
+    {
+
+    }
+
+    private void LoginUser()
+    {
+
+    }
+
+    public void AdminInterface()
+    {
         int CaseNum;
 
         do
@@ -23,14 +104,15 @@ class Program
 
             string input = Console.ReadLine();
             if (int.TryParse(input, out CaseNum)) { }
-            else {
-                Console.WriteLine("Wrong Input, only integers are accepted"); 
+            else
+            {
+                Console.WriteLine("Wrong Input, only integers are accepted");
             }
-                switch (CaseNum)
-                {
-                    case 1: p.AddAccount(); break;
-                    case 2: p.AccountList(); break;
-                }
+            switch (CaseNum)
+            {
+                case 1: AddAccount(); break;
+                case 2: AccountList(); break;
+            }
         } while (CaseNum != 9);
     }
 
