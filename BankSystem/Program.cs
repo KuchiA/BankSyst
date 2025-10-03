@@ -81,14 +81,39 @@ class Program
         Console.WriteLine("YEEEEEEEEEEEEEES");
     }
 
-    private void LoginAdmin()
+    private void TransferMoney()
     {
 
     }
 
-    private void LoginUser()
+    private void SeeAmount()
     {
 
+    }
+
+    public void UserInterface()
+    {
+        int CaseNum;
+
+        do
+        {
+
+            Console.WriteLine("Press 1 to See Amount");
+            Console.WriteLine("Press 2 to Transfer Money");
+            Console.WriteLine("Press 9 to leave");
+
+            string input = Console.ReadLine();
+            if (int.TryParse(input, out CaseNum)) { }
+            else
+            {
+                Console.WriteLine("Wrong Input, only integers are accepted");
+            }
+            switch (CaseNum)
+            {
+                case 1: SeeAmount(); break;
+                case 2: TransferMoney(); break;
+            }
+        } while (CaseNum != 9);
     }
 
     public void AdminInterface()
